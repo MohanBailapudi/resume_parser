@@ -6,8 +6,8 @@ from keras_en_parser_and_analyzer.library.utility.text_fit import fit_text
 from keras_en_parser_and_analyzer.library.utility.tokenizer_utils import word_tokenize
 import os
 
-line_labels = {0: 'experience', 1: 'knowledge', 2: 'education', 3: 'project', 4: 'others', 5: 'expertise'}
-line_types = {0: 'header', 1: 'meta', 2: 'content', 3: 'domain knowledge'}
+line_labels = {0: 'Experience', 1: 'Knowledge', 2: 'Education', 3: 'Project', 4: 'others', 5: 'Expertise', 6: 'Role'}
+line_types = {0: 'Header', 1: 'Meta', 2: 'Content'}
 
 
 class ResumeParser(object):
