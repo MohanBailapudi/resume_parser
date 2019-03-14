@@ -1,0 +1,7 @@
+meta	project	Narsupalli Mohana Krishna
+header	experience	OBJECTIVE
+meta	knowledge	TECHNOLOGY
+meta	experience	SKILLS
+header	experience	Operating Systems: Windows, Linux
+header	experience	2013-2017
+header	experience	Junior Data Scientist - Capiot Software Pvt.Ltd,Pune

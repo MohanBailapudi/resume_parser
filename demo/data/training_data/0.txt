@@ -1,0 +1,4 @@
+header	others	John Smith
+meta	education	Kent State University, Kent, Ohio August 2015 - Present
+meta	experience	Server
+header	knowledge	VOLUNTEER EXPERIENCE
