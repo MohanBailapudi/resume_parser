@@ -1,0 +1,6 @@
+meta	experience	B.tech, Computer Science and Engineering
+header	experience	Professional Chronicles:
+meta	experience	KNN, Naïve Bayes, SVM, Decision forest, Deep learning and Neural networks etc.
+header	experience	Educational Details:
+header	experience	Linear Discrimination Analysis, Principal component Analysis, Deep Learning, Natural
+header	experience	➢  Languages: Python 2.7, Python 3.4, Basics of C, MySQL.

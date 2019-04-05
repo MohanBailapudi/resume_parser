@@ -1,6 +1,7 @@
 import os
 import sys
 from tkinter import *
+from tkinter.ttk import *
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -16,27 +17,29 @@ class AnnotatorGui(Frame):
 
         self.master.rowconfigure(0, weight=1)
         self.master.columnconfigure(0, weight=1)
-        self.grid(sticky=W + E + N + S)
+        self.grid(row=0,column=0,sticky=W + E + N + S)
 
         self.line_index_label_list = []
         self.line_content_text_list = []
         self.line_type_button_list = []
         self.line_label_button_list = []
 
+
         for line_index, line in enumerate(table_content):
             self.build_line(table_content, line_index, line)
-
         self.rowconfigure(1, weight=1)
         self.columnconfigure(1, weight=1)
 
     def build_line(self, table_content, line_index, line):
         line_content = line[0]
 
-        line_index_label = Label(self, width=10, height=1, text=str(line_index))
+        # line_index_label = Label(self, width=10, height=1, text=str(line_index))
+        line_index_label = Label(self, width=10, text=str(line_index))
         line_index_label.grid(row=line_index, column=0, sticky=W + E + N + S)
         line_content_text = Text(self, width=100, height=1)
         line_content_text.insert(INSERT, line_content)
         line_content_text.grid(row=line_index, column=1, sticky=W + E + N + S)
+
 
         def line_type_button_click(_line_index):
             line_type = table_content[_line_index][1]
@@ -62,7 +65,6 @@ class AnnotatorGui(Frame):
         if line[2] != -1:
             line_label_button["text"] = "Type: " + line_labels[line[2]]
 
-
 def command_line_annotate(training_data_dir_path, index, file_path, file_content):
     with open(os.path.join(training_data_dir_path, str(index) + '.txt'), 'wt', encoding='utf8') as f:
         for line_index, line in enumerate(file_content):
@@ -86,8 +88,22 @@ def guess_line_label(line):
 
 def gui_annotate(training_data_dir_path, index, file_path, file_content):
     root = Tk()
+
+    root.columnconfigure(0, weight=1)
+    root.rowconfigure(0, weight=1)
+    root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
+
+    canvas = Canvas(root, width=170, height=300)
+    vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
+    canvas.grid(row=0, column=0, sticky=W + E + N + S)
+    vsb.grid(row=0, column=1, sticky=N + S)
+
+
+
     table_content = [[line, guess_line_type(line), guess_line_label(line)] for line in file_content]
     gui = AnnotatorGui(root, table_content)
+
+
 
     def callback():
         root.destroy()
@@ -101,12 +117,13 @@ def gui_annotate(training_data_dir_path, index, file_path, file_content):
                 label = line[2]
 
                 if data_type == -1 or label == -1:
-                    continue
+                     continue
 
                 print('write line: ', line)
                 f.write(line_types[data_type] + '\t' + line_labels[label] + '\t' + line_content)
                 f.write('\n')
 
+    canvas.config(yscrollcommand=vsb.set, scrollregion=canvas.bbox("all"))
     root.protocol("WM_DELETE_WINDOW", callback)
     gui.mainloop()
 
@@ -120,7 +137,6 @@ def main():
     collected = read_pdf_and_docx(data_dir_path, command_logging=True, callback=lambda index, file_path, file_content: {
         gui_annotate(training_data_dir_path, index, file_path, file_content)
     })
-
     print('count: ', len(collected))
 
 
