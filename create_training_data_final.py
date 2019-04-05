@@ -52,10 +52,10 @@ class AnnotatorGui(Frame):
 
         line_type_button = Button(self.master, text="Type: Unknown", width=25,
                                   command=lambda: line_type_button_click(line_index))
-        self.master.create_window(1760, line_index * 35, height=40, width=100, window=line_type_button)
+        self.master.create_window(1200, line_index * 35, height=40, width=100, window=line_type_button)
         line_label_button = Button(self.master, text='Label: Unknown', width=25,
                                    command=lambda: line_label_button_click(line_index))
-        self.master.create_window(1860, line_index * 35, height=40, width=100, window=line_label_button)
+        self.master.create_window(1300, line_index * 35, height=40, width=100, window=line_label_button)
 
         if line[1] != -1:
             line_type_button["text"] = "Type: " + line_types[line[1]]
